@@ -111,10 +111,11 @@ public class CodeCoverageManager {
     }
 
     private void upload() {
+        Log.i(TAG, "upload 前 1");
         if (filePath == null) {
             return;
         }
-        Log.i(TAG, "upload 前");
+        Log.i(TAG, "upload 前 2");
         new Thread() {
             @Override
             public void run() {
