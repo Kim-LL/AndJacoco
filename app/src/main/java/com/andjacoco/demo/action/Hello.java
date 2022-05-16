@@ -1,4 +1,4 @@
-package com.andjacoco.demo;
+package com.andjacoco.demo.action;
 
 import android.content.Context;
 import android.util.Log;

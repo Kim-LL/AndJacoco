@@ -1,10 +1,12 @@
-package com.andjacoco.demo;
+package com.andjacoco.demo.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.andjacoco.demo.R;
 
 public class TestActvitiy extends AppCompatActivity {
 

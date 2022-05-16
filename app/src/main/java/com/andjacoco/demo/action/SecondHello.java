@@ -1,8 +1,8 @@
-package com.andjacoco.demo;
+package com.andjacoco.demo.action;
 
 import android.util.Log;
 
-public class FourthHello {
+public class SecondHello {
     public void sayHello() {
         Log.i("SecondHello", "hello");
     }
