@@ -91,9 +91,9 @@ dependencies {
 //        exclude group: 'org.jacoco', module: 'org.jacoco.core'
 //    }
 
-    implementation project(path: 'jacoco-core')
+    implementation project(path: ':jacoco-core')
     implementation project(path: ':rt')
-    implementation project(path: 'rt-no-op')
+    implementation project(path: ':rt-no-op')
 //    debugImplementation "com.github.ttpai.AndJacoco:rt:0.0.6"
 //    releaseImplementation "com.github.ttpai.AndJacoco:rt-no-op:0.0.6"
 
