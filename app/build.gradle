@@ -25,7 +25,7 @@ jacocoCoverageConfig {
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion "30.0.1"
 
     defaultConfig {
