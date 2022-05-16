@@ -4,10 +4,10 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/tv_second"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:id="@+id/tv_second"
         android:text="second" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
