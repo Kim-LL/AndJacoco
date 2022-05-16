@@ -148,8 +148,10 @@ public class CodeCoverageManager {
                         .addFormDataPart("versionCode", "" + versionCode)
                         .build();
 
+                String url = URL_HOST + "/WebServer/JacocoApi/uploadEcFile";
+                Log.i(TAG, "请求地址:" + url);
                 Response response = client.newCall(new Request.Builder()
-                        .url(URL_HOST + "/WebServer/JacocoApi/uploadEcFile")
+                        .url(url)
                         .post(body)
                         .build()).execute();
                 if (response.isSuccessful()) {
