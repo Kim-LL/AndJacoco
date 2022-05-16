@@ -21,11 +21,9 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         Log.d("TAG","BaseActivity onDestroy");
-        PermissionUtils.checkPermission(this);
         CodeCoverageManager.generateCoverageFile();
-
+        super.onDestroy();
     }
 
     @Override

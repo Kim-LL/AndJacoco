@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.andjacoco.demo.action.Hello
 import com.andjacoco.demo.R
+import com.andjacoco.demo.utils.PermissionUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -11,7 +12,8 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Hello.Toast(this, "hello132")
+        PermissionUtils.checkPermission(this)
+//        Hello.Toast(this, "hello132")
 
         tv.setOnClickListener {
             startActivity(Intent(this, SecondActivity::class.java))
