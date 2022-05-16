@@ -19,6 +19,7 @@ public class MyApp extends Application {
         Log.i(TAG, "初始化开始");
         CodeCoverageManager.init(app, BuildConfig.host);//内网 服务器地址);
         CodeCoverageManager.uploadData();
+        Log.i(TAG, "初始化结束");
     }
 
     @Override
