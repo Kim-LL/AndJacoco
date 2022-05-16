@@ -44,17 +44,17 @@ public class CodeCoverageManager {
         String path = context.getFilesDir().getAbsolutePath();
         APP_NAME = context.getPackageName().replace(".", "");
         versionCode = getVersion(context);
-        if (serverHost != null) {
+        if (serverHost != null)
             URL_HOST = serverHost;
-        }
+
         dirPath = path + "/jacoco/" + versionCode + "/";
-        Log.i(TAG, "dirPath = " + dirPath);
         File dir = new File(dirPath);
         if (!dir.exists()) dir.mkdirs();
         filePath = dirPath + UUID.randomUUID().toString() + "_" + System.currentTimeMillis() + ".ec";
 
         File f = new File(filePath);
         Log.d(TAG, filePath + " canRead=" + f.canRead() + " canWrite=" + f.canWrite());
+
     }
 
     public static void generateCoverageFile() {
@@ -110,7 +110,6 @@ public class CodeCoverageManager {
     }
 
     private void upload() {
-        Log.i(TAG, "upload 前 -- " + Thread.currentThread());
         if (filePath == null) {
             return;
         }
@@ -119,7 +118,6 @@ public class CodeCoverageManager {
             @Override
             public void run() {
                 super.run();
-
                 Log.d(TAG, "开始上传 " + Thread.currentThread());
                 try {
                     syncUploadFiles();
@@ -149,16 +147,15 @@ public class CodeCoverageManager {
                         .addFormDataPart("appName", APP_NAME)
                         .addFormDataPart("versionCode", "" + versionCode)
                         .build();
-
                 String url = URL_HOST + "/WebServer/JacocoApi/uploadEcFile";
-                Log.i(TAG, "请求地址:" + url);
+                Log.i(TAG, "上传接口地址: " + url);
                 Response response = client.newCall(new Request.Builder()
                         .url(url)
                         .post(body)
                         .build()).execute();
                 if (response.isSuccessful()) {
                     String str = response.body().string();
-                    Log.d(TAG, " succ =" + str);
+                    Log.d(TAG, " success =" + str);
                     if (str.contains("200")) {
                         f.delete();
                     }
