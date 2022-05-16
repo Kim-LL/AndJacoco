@@ -111,7 +111,10 @@ public class CodeCoverageManager {
     }
 
     private void upload(){
-        if(filePath==null) return;
+        Log.i(TAG,"upload 前 -- " + Thread.currentThread());
+        if(filePath==null) {
+            return;
+        }
 
         new Thread(){
             @Override
