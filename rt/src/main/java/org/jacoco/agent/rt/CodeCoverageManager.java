@@ -48,6 +48,7 @@ public class CodeCoverageManager {
             URL_HOST=serverHost;
 
         dirPath = path + "/jacoco/" + versionCode + "/";
+        Log.i(TAG, "dirPath = " + dirPath);
         File dir = new File(dirPath);
         if (!dir.exists()) dir.mkdirs();
         filePath = dirPath + UUID.randomUUID().toString() + "_" + System.currentTimeMillis() + ".ec";
