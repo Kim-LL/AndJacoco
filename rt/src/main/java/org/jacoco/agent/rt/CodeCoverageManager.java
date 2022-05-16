@@ -28,7 +28,7 @@ import okhttp3.Response;
  * Description: 代码覆盖工具 jacoco，运行时
  */
 public class CodeCoverageManager {
-    private static CodeCoverageManager sInstance=new CodeCoverageManager();
+    private static CodeCoverageManager sInstance = new CodeCoverageManager();
     private static String URL_HOST = "http://172.20.10.5:8080";//内网 服务器地址
 
     private static String APP_NAME;
@@ -40,14 +40,15 @@ public class CodeCoverageManager {
     private static final String TAG = "CodeCoverageManager";
 
 
-    public static void init(Context context,String serverHost){
-       String path=context.getFilesDir().getAbsolutePath();
-        APP_NAME=context.getPackageName().replace(".","");
-        versionCode=getVersion(context);
-        if(serverHost!=null)
-            URL_HOST=serverHost;
-
+    public static void init(Context context, String serverHost) {
+        String path = context.getFilesDir().getAbsolutePath();
+        APP_NAME = context.getPackageName().replace(".", "");
+        versionCode = getVersion(context);
+        if (serverHost != null) {
+            URL_HOST = serverHost;
+        }
         dirPath = path + "/jacoco/" + versionCode + "/";
+        Log.i(TAG, "路径为: " + path);
         File dir = new File(dirPath);
         if (!dir.exists()) dir.mkdirs();
         filePath = dirPath + UUID.randomUUID().toString() + "_" + System.currentTimeMillis() + ".ec";
@@ -84,7 +85,7 @@ public class CodeCoverageManager {
      */
     private void writeToFile() {
 
-        if(filePath==null) return;
+        if (filePath == null) return;
         OutputStream out = null;
         try {
             out = new FileOutputStream(filePath, false);
@@ -100,7 +101,7 @@ public class CodeCoverageManager {
     }
 
     private void close(Closeable out) {
-        if(out!=null) {
+        if (out != null) {
             try {
                 out.close();
             } catch (IOException e) {
@@ -109,22 +110,24 @@ public class CodeCoverageManager {
         }
     }
 
-    private void upload(){
-        if(filePath==null) return;
-
-        new Thread(){
+    private void upload() {
+        if (filePath == null) {
+            return;
+        }
+        Log.i(TAG, "upload 前");
+        new Thread() {
             @Override
             public void run() {
                 super.run();
 
-                Log.d(TAG,"开始上传 "+Thread.currentThread());
+                Log.d(TAG, "开始上传 " + Thread.currentThread());
                 try {
                     syncUploadFiles();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.e(TAG,"uploadData "+e.getMessage());
+                    Log.e(TAG, "uploadData " + e.getMessage());
                 }
-                Log.d(TAG,"执行完成");
+                Log.d(TAG, "执行完成");
             }
         }.start();
     }
@@ -135,10 +138,10 @@ public class CodeCoverageManager {
         File dir = new File(dirPath);
         if (dir.exists() && dir.list().length > 0) {
 
-            Log.d(TAG,"File list="+ Arrays.toString(dir.list()));
-            File[] files=dir.listFiles();
+            Log.d(TAG, "File list=" + Arrays.toString(dir.list()));
+            File[] files = dir.listFiles();
             for (File f : files) {
-                if (!f.getName().endsWith(".ec") || f.length()<=0) continue;
+                if (!f.getName().endsWith(".ec") || f.length() <= 0) continue;
 
                 RequestBody fileBody = RequestBody.create(MediaType.get("application/plain"), f);
                 RequestBody body = new MultipartBody.Builder()
@@ -156,7 +159,7 @@ public class CodeCoverageManager {
                 if (response.isSuccessful()) {
                     String str = response.body().string();
                     Log.d(TAG, " succ =" + str);
-                    if(str.contains("200")){
+                    if (str.contains("200")) {
                         f.delete();
                     }
                 } else {
