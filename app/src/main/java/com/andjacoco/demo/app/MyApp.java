@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.andjacoco.demo.BuildConfig;
 
-import org.jacoco.agent.rt.ReleaseCodeCoverageManager;
+import org.jacoco.agent.rt.CodeCoverageManager;
 
 public class MyApp extends Application {
     public static Application app;
@@ -17,8 +17,8 @@ public class MyApp extends Application {
         super.onCreate();
         app = this;
         Log.i(TAG, "初始化开始");
-        ReleaseCodeCoverageManager.init(app, BuildConfig.host);//内网 服务器地址);
-        ReleaseCodeCoverageManager.uploadData();
+        CodeCoverageManager.init(app, BuildConfig.host);//内网 服务器地址);
+        CodeCoverageManager.uploadData();
         Log.i(TAG, "初始化结束");
     }
 
@@ -26,7 +26,7 @@ public class MyApp extends Application {
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
         if (level == TRIM_MEMORY_UI_HIDDEN) {
-            ReleaseCodeCoverageManager.generateCoverageFile();
+            CodeCoverageManager.generateCoverageFile();
         }
     }
 }
