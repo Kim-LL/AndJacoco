@@ -8,10 +8,10 @@ import android.content.Context;
  * Date: 2020/9/16
  * Description: 空代码实现，用于正式编译
  */
-public class ReleaseCodeCoverageManager {
+public class CodeCoverageManager {
 
 
-    private ReleaseCodeCoverageManager() {
+    private CodeCoverageManager() {
     }
 
 
