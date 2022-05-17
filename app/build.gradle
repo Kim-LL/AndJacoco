@@ -95,7 +95,7 @@ dependencies {
 //    debugImplementation "com.github.ttpai.AndJacoco:rt:0.0.6"
 //    releaseImplementation "com.github.ttpai.AndJacoco:rt-no-op:0.0.6"
     implementation project(path: ':rt')
-    implementation project(path: ':rt-no-op')
+//    implementation project(path: ':rt-no-op')
     implementation project(path: ':jacoco-core')
 
 }
