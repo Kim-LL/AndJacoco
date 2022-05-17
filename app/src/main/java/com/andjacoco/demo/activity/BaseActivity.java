@@ -9,7 +9,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.andjacoco.demo.utils.PermissionUtils;
 
-import org.jacoco.agent.rt.CodeCoverageManager;
+import org.jacoco.agent.rt.ReleaseCodeCoverageManager;
 
 /**
  * FileName: BaseActivity
@@ -22,7 +22,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         Log.d("TAG","BaseActivity onDestroy");
-        CodeCoverageManager.generateCoverageFile();
+        ReleaseCodeCoverageManager.generateCoverageFile();
         super.onDestroy();
     }
 
