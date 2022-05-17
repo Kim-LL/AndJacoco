@@ -7,6 +7,7 @@ import com.andjacoco.demo.BuildConfig;
 
 import org.jacoco.agent.rt.CodeCoverageManager;
 
+
 public class MyApp extends Application {
     public static Application app;
 
