@@ -1,7 +1,9 @@
-package com.andjacoco.demo;
+package com.andjacoco.demo.app;
 
 import android.app.Application;
 import android.util.Log;
+
+import com.andjacoco.demo.BuildConfig;
 
 import org.jacoco.agent.rt.CodeCoverageManager;
 

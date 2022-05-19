@@ -1,8 +1,11 @@
-package com.andjacoco.demo
+package com.andjacoco.demo.activity
 
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import com.andjacoco.demo.action.FourthAction
+import com.andjacoco.demo.R
+import com.andjacoco.demo.action.SecondAction
 
 class SecondActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,9 +17,9 @@ class SecondActivity : BaseActivity() {
         findViewById<TextView>(R.id.tv_second).setOnClickListener({
             Log.i("tag", "log")
         })
-        SecondHello().sayHello()
+        SecondAction().sayHello()
 //        ThirdHello().sayHello()
-        FourthHello().sayHello()
+        FourthAction().sayHello()
 
         addTest()
     }

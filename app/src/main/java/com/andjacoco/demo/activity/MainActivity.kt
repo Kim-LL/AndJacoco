@@ -1,8 +1,9 @@
-package com.andjacoco.demo
+package com.andjacoco.demo.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import com.andjacoco.demo.action.BaseAction
+import com.andjacoco.demo.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -10,13 +11,13 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        Hello.Toast(this, "hello132")
+        BaseAction.Toast(this, "hello132")
 
         tv.setOnClickListener {
             startActivity(Intent(this, SecondActivity::class.java))
         }
 
-        Hello.hello(false)
+        BaseAction.hello(false)
 
     }
 

@@ -1,4 +1,4 @@
-package com.andjacoco.demo;
+package com.andjacoco.demo.model.pojo;
 
 /**
  * FileName: UploadResult

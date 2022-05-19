@@ -1,4 +1,4 @@
-package com.andjacoco.demo;
+package com.andjacoco.demo.action;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-public class Hello {
+public class BaseAction {
     public static void Toast(Context context, String s) {
         try {
             int a = 0;
