@@ -1,28 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.ttp.and_jacoco'
-
-//代码覆盖配置
-jacocoCoverageConfig {
-    jacocoEnable true //开关
-    branchName 'main'//要对比的分支名
-    host="http://172.20.10.5:8080"//下载服务host
-    execDir "${project.buildDir.absolutePath}/outputs/coverage"//ec 下载存放路径
-    sourceDirectories = getAllJavaDir() //源码路径
-    classDirectories = ["${rootProject.projectDir.absolutePath}/app/classes"] //classes 路径
-    gitPushShell="${project.projectDir}/shell/gitPushShell.sh" //提交git 命令
-    copyClassShell="${project.projectDir}/shell/pullDiffClass.sh" //copy classes 命令
-    includes = ['com.andjacoco.demo'] //要 包含的class 包名
-    excludeClass = { // return true 表示要排除的class
-//        println("exclude it=${it}")
-        return false
-    }
-    excludeMethod = {//return true 表示要排除此方法
-        println("excludeMethod it=${it}")
-        return false
-    }
-}
+apply from: 'jacoco_config.gradle'
 
 android {
     compileSdkVersion 29
@@ -39,39 +18,21 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-        incremental = true  //开启增量编译
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            buildConfigField "String", "host", "\"${jacocoCoverageConfig.host}\""
-
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         debug{
-            buildConfigField "String", "host", "\"${jacocoCoverageConfig.host}\""
+//            buildConfigField "String", "host", "\"${jacocoCoverageConfig.host}\""
 
         }
     }
-}
-
-
-
-def ArrayList<String> getAllJavaDir() {
-    Set<Project> projects = project.rootProject.subprojects
-    List<String> javaDir = new ArrayList<>(projects.size())
-    projects.forEach {
-        javaDir.add("$it.projectDir/src/main/java")
-    }
-    return javaDir
-}
-
-def isWindows(){
-    return System.properties['os.name'].toLowerCase().contains('windows')
 }
 
 
@@ -86,16 +47,4 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    androidTestImplementation project(path: ':jacoco-core')
-
-    implementation('org.jacoco:org.jacoco.report:0.8.5') {
-        exclude group: 'org.jacoco', module: 'org.jacoco.core'
-    }
-//
-    debugImplementation "com.github.ttpai.AndJacoco:rt:0.0.6"
-    releaseImplementation "com.github.ttpai.AndJacoco:rt-no-op:0.0.6"
-//    implementation project(path: ':rt')
-//    implementation project(path: ':rt-no-op')
-//    implementation project(path: ':jacoco-core')
-
 }

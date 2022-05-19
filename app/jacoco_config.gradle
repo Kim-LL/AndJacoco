@@ -1,0 +1,65 @@
+apply plugin: 'com.ttp.and_jacoco'
+
+//代码覆盖配置
+jacocoCoverageConfig {
+    jacocoEnable true //开关
+    branchName 'master'//要对比的分支名
+    host="http://192.168.1.17:8080"//下载服务host
+    execDir "${project.buildDir.absolutePath}/outputs/coverage"//ec 下载存放路径
+    sourceDirectories = getAllJavaDir() //源码路径
+    classDirectories = ["${rootProject.projectDir.absolutePath}/app/classes"] //classes 路径
+    gitPushShell="${project.projectDir}/shell/gitPushShell.sh" //提交git 命令
+    copyClassShell="${project.projectDir}/shell/pullDiffClass.sh" //copy classes 命令
+    includes = ['com.andjacoco.demo'] //要 包含的class 包名
+    excludeClass = { // return true 表示要排除的class
+//        println("exclude it=${it}")
+        return false
+    }
+    excludeMethod = {//return true 表示要排除此方法
+        println("excludeMethod it=${it}")
+        return false
+    }
+}
+
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+        incremental = true  //开启增量编译
+    }
+
+    buildTypes {
+        debug{
+            buildConfigField "String", "host", "\"${jacocoCoverageConfig.host}\""
+        }
+        release {
+            buildConfigField "String", "host", "\"${jacocoCoverageConfig.host}\""
+        }
+    }
+}
+
+
+
+def ArrayList<String> getAllJavaDir() {
+    Set<Project> projects = project.rootProject.subprojects
+    List<String> javaDir = new ArrayList<>(projects.size())
+    projects.forEach {
+        javaDir.add("$it.projectDir/src/main/java")
+    }
+    return javaDir
+}
+
+def isWindows(){
+    return System.properties['os.name'].toLowerCase().contains('windows')
+}
+
+
+dependencies {
+    implementation('org.jacoco:org.jacoco.report:0.8.5') {
+        exclude group: 'org.jacoco', module: 'org.jacoco.core'
+    }
+
+    debugImplementation "com.github.ttpai.AndJacoco:rt:0.0.6"
+    releaseImplementation "com.github.ttpai.AndJacoco:rt-no-op:0.0.6"
+
+}
