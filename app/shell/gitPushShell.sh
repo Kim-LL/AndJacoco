@@ -20,7 +20,7 @@ echo "gitBran=$gitBran"
 #git stash pop #取出
 
 echo "start add -f app/classes/--"
-git add -f /Users/xiaobin.li/AndroidStudioProjects/jacoco/AndJacoco-main/app/classes/
+git add -f /Users/joyme/Desktop/android_workspace/AndJacoco/app/classes
 #git add -f app/classes/
 
 echo "start commit -- commit -am $1"
