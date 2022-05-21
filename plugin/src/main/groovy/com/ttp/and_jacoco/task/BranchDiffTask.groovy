@@ -279,8 +279,8 @@ class BranchDiffTask extends DefaultTask {
                 def file = new File(dataDir, name)
                 if (file.exists() && file.length() > 0) //存在
                     continue
-                println "downloadFile ${host}${path}"
-                println "execute curl -o ${file.getAbsolutePath()} ${host}${path}"
+                println "downloadFile ${path}"
+                println "execute curl -o ${file.getAbsolutePath()} ${path}"
 
                 "curl -o ${file.getAbsolutePath()} ${path}".execute().text
             }
