@@ -282,7 +282,7 @@ class BranchDiffTask extends DefaultTask {
                 println "downloadFile ${host}${path}"
                 println "execute curl -o ${file.getAbsolutePath()} ${host}${path}"
 
-                "curl -o ${file.getAbsolutePath()} ${host}${path}".execute().text
+                "curl -o ${file.getAbsolutePath()} ${path}".execute().text
             }
         }
         println "downloadData 下载完成"
