@@ -1,6 +1,6 @@
 package com.ttp.and_jacoco.task
 
-
+import com.alibaba.fastjson.JSON
 import com.android.utils.FileUtils
 import com.ttp.and_jacoco.extension.JacocoExtension
 import com.ttp.and_jacoco.report.ReportGenerator
@@ -10,6 +10,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 import org.jacoco.core.data.MethodInfo
 import org.jacoco.core.diff.DiffAnalyzer
+import org.json.JSONArray
 
 class BranchDiffTask extends DefaultTask {
     def currentName//当前分支名
@@ -251,24 +252,23 @@ class BranchDiffTask extends DefaultTask {
         def dataDir = jacocoExtension.execDir
         new File(dataDir).mkdirs()
 
-        def host = jacocoExtension.host
+//        def host = jacocoExtension.host
         def android = project.extensions.android
         def appName = android.defaultConfig.applicationId.replace(".","")
         def versionCode = android.defaultConfig.versionCode
 //        http://10.10.17.105:8080/WebServer/JacocoApi/queryEcFile?appName=dealer&versionCode=100
 
         def curl = "curl ${host}/WebServer/JacocoApi/queryEcFile?appName=${appName}&versionCode=${versionCode}"
-        println "curl = ${curl}"
+        System.out.println("curl = ${curl}")
         def text = curl.execute().text
-        println "queryEcFile = ${text}"
-        text = text.substring(text.indexOf("[") + 1, text.lastIndexOf("]")).replace("]", "")
+        System.out.println("queryEcFile = ${text}")
+        def resultObj = JSON.parseObject(text)
+        JSONArray files = resultObj.getJSONObject("data").getJSONArray("files")
 
-        println "paths=${text}"
-
-        if ("".equals(text)) {
+        if ("" == files.toString()) {
             return
         }
-        String[] paths = text.split(',')
+        List<String> paths = files.toList()
         println "下载executionData 文件 length=${paths.length}"
 
         if (paths != null && paths.size() > 0) {

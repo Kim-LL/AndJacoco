@@ -19,6 +19,8 @@ dependencies {
 //    implementation project(path: ':jacoco-core')
     implementation files('libs/jacoco-core.jar')
 //    implementation "com.github.ttpai.AndJacoco:jacoco-core:0.0.5"
+    // https://mvnrepository.com/artifact/com.alibaba/fastjson
+    implementation 'com.alibaba:fastjson:1.2.80'
 
 }
 
