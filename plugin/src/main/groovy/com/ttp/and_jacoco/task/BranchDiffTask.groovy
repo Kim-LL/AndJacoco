@@ -274,9 +274,8 @@ class BranchDiffTask extends DefaultTask {
         if (paths != null && paths.size() > 0) {
             for (String path : paths) {
                 path = path.replace("\"", '')
-                println "path=${path}"
                 def name = path.substring(path.lastIndexOf("/") + 1)
-                println "${path}"
+                println "path=${path}"
                 def file = new File(dataDir, name)
                 if (file.exists() && file.length() > 0) //存在
                     continue
