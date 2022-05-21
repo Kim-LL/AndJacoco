@@ -16,10 +16,10 @@ dependencies {
     implementation ('org.jacoco:org.jacoco.report:0.8.5'){
         exclude group: 'org.jacoco', module: 'org.jacoco.core'
     }
-//    implementation project(path: ':jacoco-core')
-//    implementation files('libs/jacoco-core.jar')
-    implementation "com.github.ttpai.AndJacoco:jacoco-core:0.0.5"
-    implementation 'com.alibaba.fastjson'
+    implementation files('libs/jacoco-core.jar')
+//    implementation "com.github.ttpai.AndJacoco:jacoco-core:0.0.5"
+    // https://mvnrepository.com/artifact/com.alibaba/fastjson
+    implementation 'com.alibaba:fastjson:1.2.80'
 }
 
 sourceCompatibility = "1.8"
