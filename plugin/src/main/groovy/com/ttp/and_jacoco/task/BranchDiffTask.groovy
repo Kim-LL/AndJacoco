@@ -269,11 +269,12 @@ class BranchDiffTask extends DefaultTask {
             return
         }
         List<String> paths = files.toList()
-        println "下载executionData 文件 length=${paths.length}"
+        println "下载executionData 文件 length=${paths.size()}"
 
         if (paths != null && paths.size() > 0) {
             for (String path : paths) {
                 path = path.replace("\"", '')
+                println "path=${path}"
                 def name = path.substring(path.lastIndexOf("/") + 1)
                 println "${path}"
                 def file = new File(dataDir, name)
